@@ -1,2 +1,3 @@
-# arduino-code
-arduino code class
+# Water Quality Check with Arduino
+
+###### description later
