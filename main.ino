@@ -1,3 +1,5 @@
+/* Lina Maudlej, Zuhdi Ghawi, Nadeen Abo Fani*/
+
 #include <checker.h>
 
 void setup() {
@@ -11,24 +13,20 @@ void setup() {
   
 }
 void loop() {
- /*************************************************/ 
  int counter=1;
  int turbidity_sensor_value=0;
  double ph_sensor_value=0;
   while(counter<= N_Avrg){
-    //turbidity
    int turbidity_val=analogRead(A0);
-   ///ph
    double ph_vltValue = 5/1024.0 * analogRead(A1);
    double ph_val=7 + ((2.5 - ph_vltValue) / 0.18);
 
-   turbidity_sensor_value+=turbidity_val;// read the input on analog pin 0:
+   turbidity_sensor_value+=turbidity_val;
    ph_sensor_value+=ph_val;
    counter++;
    delay(500);
   }
 
-  /*************************************************/
   int turbidity_avrg=turbidity_sensor_value/N_Avrg;
   int ph_avrg=ph_sensor_value/N_Avrg;
   Serial.println(turbidity_avrg);
