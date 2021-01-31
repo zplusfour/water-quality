@@ -1,15 +1,9 @@
-int red_light_pin= 8;
-int green_light_pin = 9;
-int blue_light_pin = 10;
-
-int N_Avrg=5; 
-int TURBIDITY_THRESHOLD=730;
-int PH_THRESHOLD=730;
+#include <checker.h>
 
 void setup() {
-  Serial.begin(9600); //Baud rate: 9600
-  pinMode(A0, INPUT);       //Set the turbidity sensor pin to input mode
-  pinMode(A1, INPUT);       //Set the ph sensor pin to input mode\
+  Serial.begin(9600);
+  pinMode(A0, INPUT);
+  pinMode(A1, INPUT);
   
   pinMode(red_light_pin, OUTPUT);
   pinMode(green_light_pin, OUTPUT);
@@ -39,29 +33,9 @@ void loop() {
   int ph_avrg=ph_sensor_value/N_Avrg;
   Serial.println(turbidity_avrg);
   if(turbidity_avrg<TURBIDITY_THRESHOLD || !(7.1<ph_avrg<7.5) ){
-    not_good_quility();
+    checker::not_good_quility();
   }else{
-    good_quility();
+    checker::good_quility();
   }
   delay(500);
-}
-
-
-void RGB_color(int red_light_value, int green_light_value, int blue_light_value)
- {
-  analogWrite(red_light_pin, red_light_value);
-  analogWrite(green_light_pin, green_light_value);
-  analogWrite(blue_light_pin, blue_light_value);
-}
-void not_good_quility(){
-  RGB_color(255, 0, 0); // Red
-  delay(1000);
-  Serial.println(" not good water"); // print out the turbidity_value you read:  
-
-}
-
-void good_quility(){
-  RGB_color(0, 255, 0); // Green
-  delay(1000);
-  Serial.println(" :) good water"); // print out the turbidity_value you read: 
 }
